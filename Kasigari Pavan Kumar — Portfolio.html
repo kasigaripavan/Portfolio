@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kasigari Pavan Kumar — Frontend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0D2238;
+    --panel:#123252;
+    --line:#3E6584;
+    --line-soft:#1D476A;
+    --paper:#EEF3F2;
+    --paper-dim:#C9D6D2;
+    --amber:#E8A33D;
+    --cyan:#8FD4EC;
+    --font-head:"Space Grotesk", system-ui, sans-serif;
+    --font-body:"IBM Plex Sans", system-ui, sans-serif;
+    --font-mono:"IBM Plex Mono", ui-monospace, monospace;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:inherit;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px); scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--font-body);
+    line-height:1.6;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size:34px 34px;
+    background-attachment:fixed;
+  }
+  a{color:inherit;}
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+
+  header.top{
+    position:sticky; top:env(safe-area-inset-top,0px); z-index:10;
+    background:rgba(13,34,56,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  header.top .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:14px; padding-bottom:14px;}
+  .brand{font-family:var(--font-mono); font-size:14px; letter-spacing:.02em; color:var(--cyan);}
+  nav{display:flex; gap:22px; font-family:var(--font-mono); font-size:13px;}
+  nav a{text-decoration:none; color:var(--paper-dim); border-bottom:1px solid transparent;}
+  nav a:hover{color:var(--amber); border-color:var(--amber);}
+
+  .hero{padding:72px 0 56px; position:relative;}
+  .plate{
+    font-family:var(--font-mono); font-size:12px; color:var(--cyan);
+    border:1px solid var(--line); display:inline-block; padding:4px 10px; margin-bottom:22px;
+  }
+  h1{
+    font-family:var(--font-head); font-weight:700; font-size:clamp(34px,6vw,56px);
+    margin:0 0 10px; line-height:1.05; color:var(--paper);
+  }
+  .role{font-family:var(--font-head); font-weight:500; font-size:clamp(17px,2.4vw,21px); color:var(--amber); margin:0 0 22px;}
+  .lede{max-width:62ch; color:var(--paper-dim); font-size:16px; margin:0 0 30px;}
+  .chips{display:flex; flex-wrap:wrap; gap:10px;}
+  .chip{
+    font-family:var(--font-mono); font-size:13px; color:var(--paper);
+    border:1px solid var(--line); padding:7px 12px; text-decoration:none;
+  }
+  .chip:hover{border-color:var(--amber); color:var(--amber);}
+
+  section{padding:52px 0; border-top:1px solid var(--line-soft);}
+  h2{
+    font-family:var(--font-head); font-weight:700; font-size:22px; margin:0 0 28px;
+    display:flex; align-items:baseline; gap:12px;
+  }
+  h2 .tag{font-family:var(--font-mono); font-size:12px; color:var(--cyan); font-weight:400;}
+
+  .skill-groups{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:26px;}
+  .skill-group h3{font-family:var(--font-mono); font-size:13px; color:var(--cyan); margin:0 0 10px; font-weight:400;}
+  .tagrow{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{
+    font-family:var(--font-mono); font-size:12.5px; color:var(--paper);
+    background:var(--panel); border:1px solid var(--line-soft); padding:5px 10px; border-radius:2px;
+  }
+
+  .job{position:relative; padding-left:26px; margin-bottom:36px; border-left:1px solid var(--line);}
+  .job:last-child{margin-bottom:0;}
+  .job::before{
+    content:""; position:absolute; left:-5px; top:4px; width:9px; height:9px;
+    background:var(--amber); border-radius:50%;
+  }
+  .job-head{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 16px; margin-bottom:8px;}
+  .job-title{font-family:var(--font-head); font-weight:700; font-size:17px;}
+  .job-meta{font-family:var(--font-mono); font-size:12.5px; color:var(--cyan); white-space:nowrap;}
+  .job ul{margin:0; padding-left:18px; color:var(--paper-dim); font-size:15px;}
+  .job li{margin-bottom:6px;}
+
+  .project{border:1px solid var(--line-soft); padding:26px; background:var(--panel);}
+  .project-head{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 16px; margin-bottom:12px;}
+  .project-title{font-family:var(--font-head); font-weight:700; font-size:18px;}
+  .stack{font-family:var(--font-mono); font-size:12px; color:var(--amber);}
+  .project ul{margin:0; padding-left:18px; color:var(--paper-dim); font-size:15px;}
+  .project li{margin-bottom:6px;}
+
+  .edu-row{display:flex; flex-wrap:wrap; justify-content:space-between; gap:4px 16px; padding:14px 0; border-bottom:1px solid var(--line-soft);}
+  .edu-row:last-child{border-bottom:none;}
+  .edu-name{font-family:var(--font-head); font-weight:500; font-size:15.5px;}
+  .edu-school{color:var(--paper-dim); font-size:14px;}
+  .edu-meta{font-family:var(--font-mono); font-size:12.5px; color:var(--cyan); text-align:right;}
+
+  footer{padding:52px 0 60px; border-top:1px solid var(--line-soft);}
+  footer h2{margin-bottom:14px;}
+  footer p{color:var(--paper-dim); max-width:52ch;}
+  .contact-row{display:flex; flex-wrap:wrap; gap:14px; margin-top:20px;}
+  .btn{
+    font-family:var(--font-mono); font-size:13.5px; text-decoration:none; color:var(--ink);
+    background:var(--amber); padding:11px 18px; border:1px solid var(--amber);
+  }
+  .btn.ghost{background:transparent; color:var(--paper); border-color:var(--line);}
+  .fine{margin-top:40px; font-family:var(--font-mono); font-size:11.5px; color:var(--line);}
+
+  @media (max-width:560px){
+    .job-meta, .edu-meta{white-space:normal;}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">K. PAVAN KUMAR</div>
+    <nav>
+      <a href="#work">Experience</a>
+      <a href="#project">Project</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="plate">Hyderabad, India</div>
+    <h1>Kasigari Pavan Kumar</h1>
+    <p class="role">Frontend Developer — React.js · JavaScript · HTML5 · CSS3</p>
+    <p class="lede">I build responsive, user-facing web applications and reusable UI components, working end-to-end from interface to API integration. Comfortable moving between design, frontend, and backend teams to ship reliable, performant experiences.</p>
+    <div class="chips">
+      <a class="chip" href="tel:+917095826629">+91 70958 26629</a>
+      <a class="chip" href="mailto:kasigaripavan123@gmail.com">kasigaripavan123@gmail.com</a>
+      <a class="chip" href="https://linkedin.com/in/kasigari-pavan-kumar" target="_blank" rel="noopener">linkedin.com/in/kasigari-pavan-kumar</a>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <h2>Experience <span class="tag">2024 — Present</span></h2>
+
+    <div class="job">
+      <div class="job-head">
+        <div class="job-title">Frontend Developer</div>
+        <div class="job-meta">Canopus IT Solutions Pvt Ltd</div>
+      </div>
+      <ul>
+        <li>Developed and maintained responsive, user-facing web pages in HTML5, CSS3 and JavaScript, ensuring cross-browser compatibility and adherence to modern web standards.</li>
+        <li>Built reusable UI components in React.js, contributing to Single Page Application features that improved navigation flow and page performance.</li>
+        <li>Collaborated with backend developers working in Node.js and Core Java to integrate frontend components with APIs.</li>
+        <li>Diagnosed and resolved frontend issues — layout inconsistencies, slow-loading elements, JavaScript errors — working cross-functionally with design and SEO teams.</li>
+        <li>Applied Object-Oriented Programming principles in Core Java modules to support feature development in live projects.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-head">
+        <div class="job-title">Technical Coordinator — Email Systems</div>
+        <div class="job-meta">Canopus IT Solutions Pvt Ltd</div>
+      </div>
+      <ul>
+        <li>Coordinated scheduling and quality assurance for email campaign templates built in HTML/CSS, verifying rendering consistency across email clients.</li>
+        <li>Maintained structured databases and applied systematic QA checks on content, links and attachments, reducing pre-send errors.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="project">
+  <div class="wrap">
+    <h2>Featured Project</h2>
+    <div class="project">
+      <div class="project-head">
+        <div class="project-title">Directive Publications — Company Website</div>
+        <div class="stack">React.js · JavaScript · HTML5 · CSS3 · Node.js</div>
+      </div>
+      <ul>
+        <li>Developed and maintained the website end-to-end, building responsive, cross-browser-compatible pages.</li>
+        <li>Built reusable React.js components to structure key site sections, improving consistency and simplifying future updates.</li>
+        <li>Worked with Node.js on the backend integration layer, connecting frontend components with site data through APIs.</li>
+        <li>Applied on-page SEO practices — page structure, metadata, keyword placement — to support search visibility.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <h3>Languages</h3>
+        <div class="tagrow">
+          <span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">Core Java</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Frameworks & Libraries</h3>
+        <div class="tagrow">
+          <span class="tag">React.js</span><span class="tag">Node.js</span><span class="tag">SPA</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Concepts</h3>
+        <div class="tagrow">
+          <span class="tag">OOP</span><span class="tag">Responsive Design</span><span class="tag">Performance Optimization</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h3>Cloud & Platforms</h3>
+        <div class="tagrow"><span class="tag">Microsoft Azure</span></div>
+      </div>
+      <div class="skill-group">
+        <h3>Additional</h3>
+        <div class="tagrow">
+          <span class="tag">SEO Fundamentals</span><span class="tag">Project Management</span><span class="tag">Team Collaboration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <h2>Education</h2>
+    <div class="edu-row">
+      <div>
+        <div class="edu-name">B.E., Electronics & Communication Engineering</div>
+        <div class="edu-school">Siddharth Institute of Engineering and Technology</div>
+      </div>
+      <div class="edu-meta">2018 – 2022<br>GPA 7.06</div>
+    </div>
+    <div class="edu-row">
+      <div>
+        <div class="edu-name">Intermediate (Class XII)</div>
+        <div class="edu-school">Sri Chaitanya Jr. College</div>
+      </div>
+      <div class="edu-meta">2016 – 2018</div>
+    </div>
+    <div class="edu-row">
+      <div>
+        <div class="edu-name">Secondary School (Class X)</div>
+        <div class="edu-school">Gurukul Vidya Peeth E.M High School</div>
+      </div>
+      <div class="edu-meta">2016</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's build something</h2>
+    <p>Open to frontend and full-stack opportunities in Hyderabad or remote. Reach out directly — I usually reply within a day.</p>
+    <div class="contact-row">
+      <a class="btn" href="mailto:kasigaripavan123@gmail.com">Email me</a>
+      <a class="btn ghost" href="tel:+917095826629">Call me</a>
+      <a class="btn ghost" href="https://linkedin.com/in/kasigari-pavan-kumar" target="_blank" rel="noopener">View LinkedIn</a>
+    </div>
+    <div class="fine">Hyderabad, India</div>
+  </div>
+</footer>
+
+</body>
+</html>
